@@ -1,7 +1,11 @@
 #include <stdarg.h>
 #include <string/stdstring.h>
 #include <sys/stat.h>
+#if !defined(SF2000)
 #include <dirent.h>
+#else
+#include "../../../dirent.h"
+#endif
 #include "libretro.h"
 #include "libretro-hatari.h"
 #include "libretro_core_options.h"
@@ -1362,7 +1366,11 @@ void retro_init(void)
 
     log_cb(RETRO_LOG_INFO, "Retro SYSTEM_DIRECTORY %s\n",retro_system_directory);
     log_cb(RETRO_LOG_INFO, "Retro SAVE_DIRECTORY %s\n",retro_save_directory);
+#if !defined(SF2000)
     log_cb(RETRO_LOG_INFO, "Retro CONTENT_DIRECTORY %s\n",retro_content_directory);
+#else
+    // retro_content_directory is NULL!
+#endif
 
     enum retro_pixel_format fmt = RETRO_PIXEL_FORMAT_RGB565;
     if (!environ_cb(RETRO_ENVIRONMENT_SET_PIXEL_FORMAT, &fmt))

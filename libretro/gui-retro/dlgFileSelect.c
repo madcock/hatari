@@ -21,7 +21,7 @@ const char DlgFileSelect_fileid[] = "Hatari dlgFileSelect.c : " __DATE__ " " __T
 
 #include "gui-retro.h"
 
-#ifdef VITA
+#ifdef VITA || defined(SF2000)
 #include "retro_files.h"
 #endif
 

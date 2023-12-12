@@ -45,7 +45,7 @@ const char DebugUI_fileid[] = "Hatari debugui.c : " __DATE__ " " __TIME__;
 #include "history.h"
 #include "symbols.h"
 
-#ifdef VITA
+#ifdef VITA || defined(SF2000)
 #include "retro_files.h"
 #endif
 

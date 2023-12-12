@@ -16,8 +16,10 @@
 /* Define if you have a X11 environment */
 //#define HAVE_X11 1
 
+#if !defined(SF2000)
 /* Define to 1 if you have the `z' library (-lz). */
 #define HAVE_LIBZ 1
+#endif
 
 /* Define to 1 if you have the <zlib.h> header file. */
 #define HAVE_ZLIB_H 1
@@ -52,7 +54,7 @@
 //#define HAVE_UNIX_DOMAIN_SOCKETS 1
 
 #ifdef __LIBRETRO__
-#if defined(AND) || defined(__PS3__) || defined(WIIU) || defined(VITA) || defined(GEKKO)
+#if defined(AND) || defined(__PS3__) || defined(WIIU) || defined(VITA) || defined(GEKKO) || defined(SF2000)
 #undef HAVE_POSIX_MEMALIGN
 #else
 #define HAVE_POSIX_MEMALIGN 1
@@ -78,17 +80,17 @@
 
 /* Define to 1 if you have the 'alphasort' function. */
 #ifndef WIN32PORT
-#if !defined(WIIU) && !defined(VITA) && !defined(__PS3__) && !defined(GEKKO)
+#if !defined(WIIU) && !defined(VITA) && !defined(__PS3__) && !defined(GEKKO) && !defined(SF2000)
 #define HAVE_ALPHASORT 1
 #endif
 #endif
 /* Define to 1 if you have the 'scandir' function. */
-#if !defined(WIIU) && !defined(VITA) && !defined(__PS3__) && !defined(GEKKO)
+#if !defined(WIIU) && !defined(VITA) && !defined(__PS3__) && !defined(GEKKO) && !defined(SF2000)
 #define HAVE_SCANDIR 1
 #endif
 
 #ifdef __LIBRETRO__
-#if defined(AND) || defined(__PS3__) || defined(WIN32PORT) || defined(WIIU) || defined(VITA)
+#if defined(AND) || defined(__PS3__) || defined(WIN32PORT) || defined(WIIU) || defined(VITA) || defined(SF2000)
 #undef HAVE_STATVFS
 #else
 #define HAVE_STATVFS 1
@@ -105,7 +107,7 @@
 
 /* Define to 1 if you have the 'ftello' function. */
 //#define HAVE_FTELLO 1
-#if defined(WIIU) || defined(VITA)
+#if defined(WIIU) || defined(VITA) || defined(SF2000)
 #define utime(file,time) 0
 #endif
 

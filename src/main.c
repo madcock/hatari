@@ -314,7 +314,7 @@ void Main_WaitOnVbl(void)
 #ifdef __LIBRETRO__
 if(pauseg==1)enter_gui();
 co_switch(mainThread);
-#if defined(WIIU) || defined(VITA)
+#if defined(WIIU) || defined(VITA) || defined(SF2000)
 return;
 #endif
 #endif

@@ -149,7 +149,6 @@ SOURCES_C += $(CPU_PREGEN)/cpudefs.c \
 				 $(EMU)/wavFormat.c \
 				 $(EMU)/xbios.c \
 				 $(EMU)/ymFormat.c \
-				 $(LIBRETRO_COMM_DIR)/libco/libco.c \
 				 $(LIBRETRO_DIR)/libretro.c \
 				 $(LIBRETRO_DIR)/hatari-mapper.c \
 				 $(LIBRETRO_DIR)/vkbd.c \
@@ -158,6 +157,11 @@ SOURCES_C += $(CPU_PREGEN)/cpudefs.c \
 				 $(LIBRETRO_DIR)/retro_strings.c \
 				 $(LIBRETRO_DIR)/retro_utils.c \
 				 $(LIBRETRO_DIR)/retro_disk_control.c \
+				 $(LIBRETRO_DIR)/stub/dlgAlert.c \
+				 $(ZLIB_SRCS)
+
+ifneq ($(STATIC_LINKING), 1)
+SOURCES_C += $(LIBRETRO_COMM_DIR)/libco/libco.c \
 				 $(LIBRETRO_COMM_DIR)/compat/compat_strl.c \
 				 $(LIBRETRO_COMM_DIR)/compat/compat_strcasestr.c \
 				 $(LIBRETRO_COMM_DIR)/compat/fopen_utf8.c  \
@@ -166,6 +170,5 @@ SOURCES_C += $(CPU_PREGEN)/cpudefs.c \
 				 $(LIBRETRO_COMM_DIR)/file/file_path_io.c \
 				 $(LIBRETRO_COMM_DIR)/string/stdstring.c \
 				 $(LIBRETRO_COMM_DIR)/time/rtime.c \
-				 $(LIBRETRO_COMM_DIR)/vfs/vfs_implementation.c \
-				 $(LIBRETRO_DIR)/stub/dlgAlert.c \
-				 $(ZLIB_SRCS)
+				 $(LIBRETRO_COMM_DIR)/vfs/vfs_implementation.c
+endif

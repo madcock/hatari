@@ -11,7 +11,11 @@ const char ZIP_fileid[] = "Hatari zip.c : " __DATE__ " " __TIME__;
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#if !defined(SF2000)
 #include <dirent.h>
+#else
+#include "../../../dirent.h"
+#endif
 #include <sys/types.h>
 #include <zlib.h>
 

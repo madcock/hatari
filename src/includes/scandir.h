@@ -8,7 +8,11 @@
 #define HATARI_SCANDIR_H
 
 #include "config.h"
+#if !defined(SF2000)
 #include <dirent.h>
+#else
+#include "../../../../dirent.h"
+#endif
 
 #ifdef QNX
 #include <sys/types.h>

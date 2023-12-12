@@ -9,7 +9,11 @@
 const char ScreenSnapShot_fileid[] = "Hatari screenSnapShot.c : " __DATE__ " " __TIME__;
 
 #include <SDL.h>
+#if !defined(SF2000)
 #include <dirent.h>
+#else
+#include "../../../dirent.h"
+#endif
 #include <string.h>
 #include "main.h"
 #include "configuration.h"

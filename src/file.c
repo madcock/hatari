@@ -35,7 +35,7 @@ const char File_fileid[] = "Hatari file.c : " __DATE__ " " __TIME__;
 //#define ftello ftell
 //#endif
 
-#ifdef VITA
+#ifdef VITA || defined(SF2000)
 #include "retro_files.h"
 #endif
 
@@ -360,7 +360,7 @@ off_t File_Length(const char *pszFileName)
  */
 bool File_Exists(const char *filename)
 {
-#if defined(WIIU) || defined(VITA)
+#if defined(WIIU) || defined(VITA) || defined(SF2000)
     FILE * file = fopen(filename, "r");
     if (file) {
         fclose(file);
@@ -386,7 +386,7 @@ bool File_Exists(const char *filename)
  */
 bool File_DirExists(const char *path)
 {
-#if defined(WIIU) || defined(VITA)
+#if defined(WIIU) || defined(VITA) || defined(SF2000)
 	DIR* dir = opendir(path);
 	if (dir)
 	{

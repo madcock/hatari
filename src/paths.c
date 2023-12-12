@@ -34,7 +34,7 @@ const char Paths_fileid[] = "Hatari paths.c : " __DATE__ " " __TIME__;
 #if defined(__MACOSX__)
 	#define HATARI_HOME_DIR "Library/Application Support/Hatari"
 #else
-#if defined(WIIU) || defined(VITA) || defined(__PS3__)
+#if defined(WIIU) || defined(VITA) || defined(__PS3__) || defined(SF2000)
 	#define HATARI_HOME_DIR "hatari"
 #else
 	#define HATARI_HOME_DIR ".hatari"
@@ -234,6 +234,20 @@ static void Paths_InitHomeDirs(void)
 	return;
 #endif
 
+#ifdef SF2000
+	strcpy(sUserHomeDir, "/mnt/sda1/bios");
+	strcpy(sHatariHomeDir, "/mnt/sda1/bios/hatari");
+	if (!File_DirExists(sHatariHomeDir))
+	{
+		if (mkdir(sHatariHomeDir, 0755) != 0)
+		{
+			strcpy(sHatariHomeDir, sUserHomeDir);
+		}
+	}
+
+	return;
+#endif
+
 #ifdef __PS3__
 	strcpy(sUserHomeDir, "/dev_hdd0/game/RETROARCH/USRDIR/cores/system");
 	strcpy(sHatariHomeDir, "/dev_hdd0/game/RETROARCH/USRDIR/cores/system");
@@ -317,6 +331,11 @@ void Paths_Init(const char* argv0)
 #elif defined(VITA)
 	strcpy(sWorkingDir, "ux0:/data/retroarch/system");
 	strcpy(sDataDir, "ux0:/data/retroarch/system");
+	Paths_InitHomeDirs();
+	return;
+#elif defined(SF2000)
+	strcpy(sWorkingDir, "/mnt/sda1/bios");
+	strcpy(sDataDir, "/mnt/sda1/bios");
 	Paths_InitHomeDirs();
 	return;
 #elif __PS3__

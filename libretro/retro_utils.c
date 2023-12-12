@@ -44,7 +44,7 @@
 #include <stdlib.h>
 
 #include "retro_utils.h"
-#ifdef VITA
+#ifdef VITA || defined(SF2000)
    #include "file/file_path.h"
 #endif
 
@@ -92,7 +92,7 @@ bool file_check_flag(const char *filename, const size_t filename_size, const cha
 // Verify if file exists
 bool file_exists(const char *filename)
 {
-#ifdef VITA
+#ifdef VITA || defined(SF2000)
    if (path_is_valid(filename) && !path_is_directory(filename))
 #else
    struct stat buf;

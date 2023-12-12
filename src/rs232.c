@@ -21,7 +21,7 @@ const char RS232_fileid[] = "Hatari rs232.c : " __DATE__ " " __TIME__;
 # include <termios.h>
 # include <unistd.h>
 #endif
-#if defined(WIIU) || defined(VITA) || defined(GEKKO)
+#if defined(WIIU) || defined(VITA) || defined(GEKKO) || defined(SF2000)
 //no rs323 for now
 #else
 #include <SDL.h>
@@ -272,7 +272,7 @@ static void RS232_CloseCOMPort(void)
 	Dprintf(("Closed RS232 files.\n"));
 }
 
-#if !defined(WIIU) && !defined(VITA) && !defined(GEKKO)
+#if !defined(WIIU) && !defined(VITA) && !defined(GEKKO) && !defined(SF2000)
 /* thread stuff */
 static SDL_sem* pSemFreeBuf;       /* Semaphore to sync free space in InputBuffer_RS232 */
 static SDL_Thread *RS232Thread = NULL; /* Thread handle for reading incoming data */
@@ -285,7 +285,7 @@ static SDL_Thread *RS232Thread = NULL; /* Thread handle for reading incoming dat
 static void RS232_AddBytesToInputBuffer(unsigned char *pBytes, int nBytes)
 {
 	int i;
-#if !defined(WIIU) && !defined(VITA) && !defined(GEKKO)
+#if !defined(WIIU) && !defined(VITA) && !defined(GEKKO) && !defined(SF2000)
 	/* Copy bytes into input buffer */
 	for (i=0; i<nBytes; i++)
 	{
@@ -305,7 +305,7 @@ static int RS232_ThreadFunc(void *pData)
 {
 	int iInChar;
 	unsigned char cInChar;
-#if !defined(WIIU) && !defined(VITA)
+#if !defined(WIIU) && !defined(VITA) && !defined(SF2000)
 	/* Check for any RS-232 incoming data */
 	while (!bQuitThread)
 	{
@@ -351,7 +351,7 @@ static int RS232_ThreadFunc(void *pData)
  */
 void RS232_Init(void)
 {
-#if !defined(WIIU) && !defined(VITA) && !defined(GEKKO)
+#if !defined(WIIU) && !defined(VITA) && !defined(GEKKO) && !defined(SF2000)
 	if (ConfigureParams.RS232.bEnableRS232)
 	{
 		if (!RS232_OpenCOMPort())
@@ -399,7 +399,7 @@ void RS232_Init(void)
  */
 void RS232_UnInit(void)
 {
-#if !defined(WIIU) && !defined(VITA) && !defined(GEKKO)
+#if !defined(WIIU) && !defined(VITA) && !defined(GEKKO) && !defined(SF2000)
 	/* Close, kill thread and free resource */
 	if (RS232Thread)
 	{
@@ -635,7 +635,7 @@ void RS232_SetFlowControl(Sint16 ctrl)
  */
 bool RS232_TransferBytesTo(Uint8 *pBytes, int nBytes)
 {
-#if !defined(WIIU) && !defined(VITA)
+#if !defined(WIIU) && !defined(VITA) && !defined(SF2000)
 	/* Make sure there's a RS-232 connection if it's enabled */
 	if (ConfigureParams.RS232.bEnableRS232)
 		RS232_OpenCOMPort();
@@ -664,7 +664,7 @@ bool RS232_TransferBytesTo(Uint8 *pBytes, int nBytes)
 bool RS232_ReadBytes(Uint8 *pBytes, int nBytes)
 {
 	int i;
-#if !defined(WIIU) && !defined(VITA) && !defined(GEKKO)
+#if !defined(WIIU) && !defined(VITA) && !defined(GEKKO) && !defined(SF2000)
 	/* Connected? */
 	if (hComIn && InputBuffer_Head != InputBuffer_Tail)
 	{
@@ -688,7 +688,7 @@ bool RS232_ReadBytes(Uint8 *pBytes, int nBytes)
  */
 bool RS232_GetStatus(void)
 {
-#if !defined(WIIU) && !defined(VITA)
+#if !defined(WIIU) && !defined(VITA) && !defined(SF2000)
 	/* Connected? */
 	if (hComIn)
 	{
